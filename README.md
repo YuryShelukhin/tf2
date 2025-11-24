@@ -29,7 +29,7 @@
 
 **Решение**
 
-1. Изучим проект. В файле `variables.tf` в блоке `vms_ssh_root_key` укажем путь к дефолтному SSH-ключу.
+1. Изучим проект. В файле `variables.tf` в блоке `vms_ssh_root_key` укажем путь к дефолтному SSH-ключу.  
     
 <img src = "img/1-1.png" width = 60%>  
  
@@ -42,27 +42,32 @@
 
 4. Используем текущий SSH-ключ. Ранее путь к нему указали в файле `variables.tf`.
 
-5. Попробуем инициализировать проект (init, validate, plan). Исправим ошибки:  
-   - желаемой версии terraform на `required_version = "~> 1.13.4"`;
+5. Попробуем инициализировать проект (init, validate, plan). Исправим ошибки:    
+   - желаемой версии terraform на `required_version = "~> 1.13.4"`;  
   
- <img src = "img/1-5-1.png" width = 60%> 
+ <img src = "img/1-5-1.png" width = 60%>   
 
   - наименование и типа создаваемой ВМ, числа ядер доли процессора, путь к SSH-ключу.
+  
  <img src = "img/1-5-2.png" width = 60%>
  <img src = "img/1-5-3.png" width = 60%>
   
-6. Зайдем на ВМ.
-`ssh -i /home/yury/HW/terraform/02/secrets/yandex-cloud-key ubuntu@158.160.48.44`
+6. Проверим создание ВМ в консоли.    
+   
+ <img src = "img/1-6-0.png" width = 60%>  
 
- <img src = "img/1-6-1.png" width = 60%>
+Зайдем на ВМ.    
+`ssh -i /home/yury/HW/terraform/02/secrets/yandex-cloud-key ubuntu@158.160.48.44`  
 
-Выполним команду `curl ifconfig.me`.
+ <img src = "img/1-6-1.png" width = 60%>  
 
- <img src = "img/1-6-2.png" width = 60%>
+Выполним команду `curl ifconfig.me`.  
 
-8. Ответы на вопросы:
-`preemptible = true`  - параметр, отвечающий за прерывание работы ВМ через 24 часа;
- `core_fraction=50` - параметр, отвечающий за объем использования процессора (20,50 или 100).
+ <img src = "img/1-6-2.png" width = 60%>  
+
+8. Ответы на вопросы:  
+`preemptible = true`  - параметр, отвечающий за прерывание работы ВМ через 24 часа;  
+`core_fraction=50` - параметр, отвечающий за объем использования процессора (20,50 или 100).  
  Используя эти параметры можно экономить денежные средства.
 
 ---
@@ -76,10 +81,10 @@
 
 **Решение**
 
-<img src = "img/0-1.png" width = 60%>  
- 
-<img src = "img/0-2.png" width = 60%> 
+Уберем хард-код из `main.tf`, oбъявив переменные в файле `variables.tf`. Проверим (plan, apply).  
 
+<img src = "img/2-1.png" width = 60%>  
+<img src = "img/2-2.png" width = 60%> 
 
 ---
 
