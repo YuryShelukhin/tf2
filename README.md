@@ -98,11 +98,12 @@
 
 **Решение**
 
-<img src = "img/0-1.png" width = 60%>  
- 
-<img src = "img/0-2.png" width = 60%> 
+Для решения задания  была создана подсеть в зоне "b".
 
+<img src = "img/3-1.png" width = 60%>  
+<img src = "img/3-2.png" width = 60%> 
 
+---
 
 
 
