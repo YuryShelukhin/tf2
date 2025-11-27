@@ -36,7 +36,6 @@ variable "subnet_zone_b_zone" {
 }
 
 
-
 # Переменные для ВМ vm_web
 variable "vm_db_name" {
   description = "Name of the web virtual machine"
