@@ -149,9 +149,11 @@ output "vm_instances" {
 
 **Решение**
 
-<img src = "img/0-1.png" width = 60%>  
+Исправим main.tf
+
+<img src = "img/5-1.png" width = 60%>  
  
-<img src = "img/0-2.png" width = 60%> 
+<img src = "img/5-2.png" width = 60%> 
 
 
 

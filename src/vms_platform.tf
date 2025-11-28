@@ -49,23 +49,23 @@ variable "vm_db_platform_id" {
   default     = "standard-v3"
 }
 
-variable "vm_db_cores" {
-  description = "Number of CPU cores for web VM"
-  type        = number
-  default     = 2
-}
+#variable "vm_db_cores" {
+#  description = "Number of CPU cores for web VM"
+#  type        = number
+#  default     = 2
+#}
 
-variable "vm_db_memory" {
-  description = "Memory size in GB for web VM"
-  type        = number
-  default     = 2
-}
+# variable "vm_db_memory" {
+#   description = "Memory size in GB for web VM"
+#   type        = number
+#   default     = 2
+# }
 
-variable "vm_db_core_fraction" {
-  description = "CPU core fraction for web VM"
-  type        = number
-  default     = 20
-}
+# variable "vm_db_core_fraction" {
+#   description = "CPU core fraction for web VM"
+#   type        = number
+#   default     = 20
+# }
 
 variable "vm_db_image" {
   description = "Image family for web VM"
@@ -73,17 +73,17 @@ variable "vm_db_image" {
   default     = "ubuntu-2004-lts"
 }
 
-variable "vm_db_disk_size" {
-  description = "Boot disk size in GB for web VM"
-  type        = number
-  default     = 5
-}
+# variable "vm_db_disk_size" {
+#   description = "Boot disk size in GB for web VM"
+#   type        = number
+#   default     = 5
+# }
 
-variable "vm_db_disk_type" {
-  description = "Boot disk type for web VM"
-  type        = string
-  default     = "network-hdd"
-}
+# variable "vm_db_disk_type" {
+#   description = "Boot disk type for web VM"
+#   type        = string
+#   default     = "network-hdd"
+# }
 
 variable "vm_db_nat" {
   description = "Enable NAT for web VM"

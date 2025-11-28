@@ -27,16 +27,16 @@ resource "yandex_compute_instance" "platform" {
   zone        = var.vm_web_zone
 
   resources {
-    cores         = var.vm_web_cores
-    memory        = var.vm_web_memory
-    core_fraction = var.vm_web_core_fraction
+    cores         = var.vms_resources.web.cores
+    memory        = var.vms_resources.web.memory
+    core_fraction = var.vms_resources.web.core_fraction
   }
 
   boot_disk {
     initialize_params {
       image_id = data.yandex_compute_image.ubuntu.id
-      size     = var.vm_web_disk_size
-      type     = var.vm_web_disk_type
+      size     = var.vms_resources.web.disk_size
+      type     = var.vms_resources.web.disk_type
     }
   }
 
@@ -49,11 +49,13 @@ resource "yandex_compute_instance" "platform" {
     nat       = var.vm_web_nat
   }
 
-  metadata = {
-    serial-port-enable = 1
-    ssh-keys           = "ubuntu:${file(var.vms_ssh_root_key)}"
-  }
-
+  # metadata = {
+  #   serial-port-enable = 1
+  #   ssh-keys           = "ubuntu:${file(var.vms_ssh_root_key)}"
+  # }
+  metadata = merge(var.common_metadata, {
+    ssh-keys = "ubuntu:${file(var.vms_ssh_root_key)}"
+  })
 }
 
 
@@ -63,16 +65,16 @@ resource "yandex_compute_instance" "netology-develop-platform-db" {
   zone        = var.vm_db_zone
 
   resources {
-    cores         = var.vm_db_cores
-    memory        = var.vm_db_memory
-    core_fraction = var.vm_db_core_fraction
+    cores         = var.vms_resources.db.cores
+    memory        = var.vms_resources.db.memory
+    core_fraction = var.vms_resources.db.core_fraction
   }
 
   boot_disk {
     initialize_params {
       image_id = data.yandex_compute_image.ubuntu.id
-      size     = var.vm_db_disk_size
-      type     = var.vm_db_disk_type
+      size     = var.vms_resources.db.disk_size
+      type     = var.vms_resources.db.disk_type
     }
   }
 
@@ -85,10 +87,11 @@ resource "yandex_compute_instance" "netology-develop-platform-db" {
     nat       = var.vm_db_nat
   }
 
-  metadata = {
-    serial-port-enable = 1
-    ssh-keys           = "ubuntu:${file(var.vms_ssh_root_key)}"
-  }
-
+  # metadata = {
+  #   serial-port-enable = 1
+  #   ssh-keys           = "ubuntu:${file(var.vms_ssh_root_key)}"
+  # }
+  metadata = merge(var.common_metadata, {
+    ssh-keys = "ubuntu:${file(var.vms_ssh_root_key)}"
+  })
 }
-
