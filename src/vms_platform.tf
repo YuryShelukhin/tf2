@@ -44,7 +44,7 @@ variable "vm_db_name" {
 }
 
 variable "vm_db_platform_id" {
-  description = "Platform ID for web VM"
+  description = "Platform ID for db VM"
   type        = string
   default     = "standard-v3"
 }
@@ -68,7 +68,7 @@ variable "vm_db_platform_id" {
 # }
 
 variable "vm_db_image" {
-  description = "Image family for web VM"
+  description = "Image family for db VM"
   type        = string
   default     = "ubuntu-2004-lts"
 }
@@ -86,9 +86,10 @@ variable "vm_db_image" {
 # }
 
 variable "vm_db_nat" {
-  description = "Enable NAT for web VM"
+  description = "Enable NAT for db VM"
   type        = bool
-  default     = true
+# default     = true изменил значение для задания 9
+  default     = false
 }
 
 variable "vm_db_zone" {
@@ -99,7 +100,7 @@ variable "vm_db_zone" {
 
 # Переменные для образа
 variable "vm_db_image_family" {
-  description = "Family of the image for web VM"
+  description = "Family of the image for db VM"
   type        = string
   default     = "ubuntu-2004-lts"
 }

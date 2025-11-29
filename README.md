@@ -304,15 +304,15 @@ test = [
 **Решение**
 
 Cконфигурируем новые сетевые ресурсы в main.tf-файле.
+Исправим сведения о сетях в variables.tf. 
+`nat=false  `
+
+<img src = "img/9-1.png" width = 60%>  
+ 
+
+
+
 
 Задание в работе....
-
-<img src = "img/0-1.png" width = 60%>  
- 
-<img src = "img/0-2.png" width = 60%> 
-
-
-
-
 
 
