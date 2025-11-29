@@ -37,7 +37,7 @@
    
 <img src = "img/1-2.png" width = 60%> 
 
-В файле `providers.tf` в блоке `provider "yandex"` укажем пути на скачанный ключ.   
+В файле `providers.tf` в блоке `provider "yandex"` укажем путm на скачанный ключ.   
 `service_account_key_file = file("/home/yury/HW/terraform/02/secrets/authorized_key.json")`  
 
 4. Используем текущий SSH-ключ. Ранее путь к нему указали в файле `variables.tf`.
@@ -68,7 +68,7 @@
 8. Ответы на вопросы:  
 `preemptible = true`  - параметр, отвечающий за прерывание работы ВМ через 24 часа;  
 `core_fraction=50` - параметр, отвечающий за объем использования процессора (20,50 или 100).  
- Используя эти параметры можно экономить денежные средства.
+ Используя эти параметры, можно экономить денежные средства.
 
 ---
 
@@ -149,8 +149,9 @@ output "vm_instances" {
 
 **Решение**
 
-Исправим main.tf
-Опишем название каждой ВМ в locals.tf
+Исправим main.tf.  
+Опишем название каждой ВМ в locals.tf.  
+
 ```
 locals {
   # Формируем имена ВМ с помощью интерполяции
@@ -204,7 +205,11 @@ locals {
 
 **Решение**
 
-Создадим единую map-переменную **vms_resources** и  внутри неё конфиги обеих ВМ в виде вложенного map(object) и укажем её в variables.tf. Также в variables.tf укажем общую метаданную. SSH-ключ из безопасности не будем показывать в открытом виде. Закомментируем дублирующий код в main.tf, variables.tf. Изменим locals.tf, так как название теперь подтягивается из блоков map-переменных.  
+Создадим единую map-переменную **vms_resources**,  внутри неё конфиги обеих ВМ в виде вложенного map(object) и укажем её в variables.tf.  
+Также в variables.tf укажем общую метаданную.  
+SSH-ключ из соображений безопасности не будем показывать в открытом виде.  
+Закомментируем дублирующий код в main.tf, variables.tf.   
+Изменим locals.tf, так как название теперь подтягивается из блоков map-переменных.    
 Развернем проект.
 
 <img src = "img/6-1.png" width = 60%>  
@@ -238,9 +243,9 @@ locals {
 `terraform console`  
 введем команду  
 `local.test_list[1]`    
-2. Найдем длину списка `test_list`  
+2. Найдем длину списка `test_list`.    
 `length(local.test_list)`  
-3. Отобразим значение ключа admin из `map   test_map`  
+3. Отобразим значение ключа admin из `map   test_map`.   
 `local.test_map["admin"]`  
 4. Напишем Interpolation-выражение.  
 `format("%s is admin for production server based on OS %s with %d vcpu, %d ram and %d virtual disks", local.test_map["admin"], local.servers["production"].image, local.servers["production"].cpu, local.servers["production"].ram, length(local.servers["production"].disks))`  
