@@ -140,3 +140,15 @@ variable "common_metadata" {
     serial-port-enable = "1"
   }
 }
+
+
+# Тестовая переменная для задания 8
+variable "test" {
+  description = "List of servers with SSH commands and IP addresses"
+  type = list(
+    map(
+      list(string)
+    )
+  )
+  default = []
+}

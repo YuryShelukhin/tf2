@@ -150,12 +150,19 @@ output "vm_instances" {
 **Решение**
 
 Исправим main.tf
+Опишем название каждой ВМ в locals.tf
+```
+locals {
+  # Формируем имена ВМ с помощью интерполяции
+  vm_web_name = "web-${var.vm_web_zone}-${var.vm_web_memory}gb"
+  vm_db_name  = "db-${var.vm_db_zone}-${var.vm_db_memory}gb"
+}
+```
 
 <img src = "img/5-1.png" width = 60%>  
- 
 <img src = "img/5-2.png" width = 60%> 
 
-
+---
 
 
 ### Задание 6
@@ -197,13 +204,12 @@ output "vm_instances" {
 
 **Решение**
 
-<img src = "img/0-1.png" width = 60%>  
+Создадим единую map-переменную **vms_resources** и  внутри неё конфиги обеих ВМ в виде вложенного map(object) и укажем её в variables.tf. Также в variables.tf укажем общую метаданную. SSH-ключ из безопасности не будем показывать в открытом виде. Закомментируем дублирующий код в main.tf, variables.tf. Изменим locals.tf, так как название теперь подтягивается из блоков map-переменных.  
+Развернем проект.
+
+<img src = "img/6-1.png" width = 60%>  
  
-<img src = "img/0-2.png" width = 60%> 
-
-
-
-------
+---
 
 ## Дополнительное задание (со звёздочкой*)
 
@@ -225,15 +231,24 @@ output "vm_instances" {
 
 В качестве решения предоставьте необходимые команды и их вывод.
 
-
 **Решение**
 
-<img src = "img/0-1.png" width = 60%>  
+Используем тестовый файл `сonsole.tf`.   
+1. Откроем terraform console.  
+`terraform console`  
+введем команду  
+`local.test_list[1]`    
+2. Найдем длину списка `test_list`  
+`length(local.test_list)`  
+3. Отобразим значение ключа admin из `map   test_map`  
+`local.test_map["admin"]`  
+4. Напишем Interpolation-выражение.  
+`format("%s is admin for production server based on OS %s with %d vcpu, %d ram and %d virtual disks", local.test_map["admin"], local.servers["production"].image, local.servers["production"].cpu, local.servers["production"].ram, length(local.servers["production"].disks))`  
+
+<img src = "img/7-1.png" width = 60%>  
  
-<img src = "img/0-2.png" width = 60%> 
+---
 
-
-------
 
 ### Задание 8*
 1. Напишите и проверьте переменную test и полное описание ее type в соответствии со значением из terraform.tfvars:
@@ -261,21 +276,20 @@ test = [
 ```
 2. Напишите выражение в terraform console, которое позволит вычленить строку "ssh -o 'StrictHostKeyChecking=no' ubuntu@62.84.124.117" из этой переменной.
 
-
-
 **Решение**
 
-<img src = "img/0-1.png" width = 60%>  
+1. Создадим переменную test в variablеs.tf
+
+<img src = "img/8-1.png" width = 60%>   
+
+2. Внесем тестовые значения в terraform.tfvars.  
+3. Напишем выражение в terraform console.  
+`var.test[0]["dev1"][0]`  
  
-<img src = "img/0-2.png" width = 60%> 
+<img src = "img/8-2.png" width = 60%> 
 
+---
 
-
-
-
-------
-
-------
 
 ### Задание 9*
 
@@ -290,10 +304,6 @@ test = [
 
 
 
-### Правила приёма работы. Для подключения предварительно через ssh измените пароль пользователя: sudo passwd ubuntu
-В качестве результата прикрепите ссылку на MD файл с описанием выполненой работы в вашем репозитории. Так же в репозитории должен присутсвовать ваш финальный код проекта.
-
-**Важно. Удалите все созданные ресурсы**.
 
 
 
