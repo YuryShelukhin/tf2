@@ -7,6 +7,7 @@ resource "yandex_vpc_subnet" "develop_zone_a" {
   zone           = var.subnet_zone_a_zone
   network_id     = yandex_vpc_network.develop.id
   v4_cidr_blocks = [var.subnet_zone_a_cidr]
+  route_table_id = yandex_vpc_route_table.nat_route.id
 }
 
 resource "yandex_vpc_subnet" "develop_zone_b" {
@@ -14,6 +15,32 @@ resource "yandex_vpc_subnet" "develop_zone_b" {
   zone           = var.subnet_zone_b_zone
   network_id     = yandex_vpc_network.develop.id
   v4_cidr_blocks = [var.subnet_zone_b_cidr]
+  route_table_id = yandex_vpc_route_table.nat_route.id
+}
+
+# публичная подсеть для NAT-шлюза
+resource "yandex_vpc_subnet" "public_nat_subnet" {
+  name           = "public-nat-subnet"
+  zone           = "ru-central1-a"
+  network_id     = yandex_vpc_network.develop.id
+  v4_cidr_blocks = ["192.168.10.0/24"] 
+}
+
+# NAT-шлюз
+resource "yandex_vpc_gateway" "nat_gateway" {
+  name = "nat-gateway"
+  shared_egress_gateway {}
+}
+
+# Таблица маршрутизации
+resource "yandex_vpc_route_table" "nat_route" {
+  name       = "nat-route"
+  network_id = yandex_vpc_network.develop.id
+
+  static_route {
+    destination_prefix = "0.0.0.0/0"
+    gateway_id         = yandex_vpc_gateway.nat_gateway.id
+  }
 }
 
 
