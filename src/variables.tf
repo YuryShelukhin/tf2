@@ -87,7 +87,7 @@ variable "vm_web_disk_type" {
 variable "vm_web_nat" {
   description = "Enable NAT for web VM"
   type        = bool
-# default     = true изменил значение для задания 9
+# default     = true # изменил значение для задания 9
   default     = false
 }
 
